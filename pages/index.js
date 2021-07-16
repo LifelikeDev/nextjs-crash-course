@@ -1,8 +1,11 @@
 import { Fragment } from "react";
+import { server } from "../config";
 import Link from "next/link";
 import articleStyles from "../styles/Article.module.css";
 
 export default function Home({ articles }) {
+  console.log(articles);
+
   const styles = {
     heading: {
       textAlign: "center",
@@ -19,13 +22,13 @@ export default function Home({ articles }) {
       <h1 style={styles.heading}>NextJS Blog</h1>
 
       <div className={articleStyles.grid}>
-        {articles.map(({ id, title, body }) => (
+        {articles.map(({ id, title, excerpt }) => (
           <Link href="/article/[id]" as={`/article/${id}`} key={id}>
             <a>
               <article className={articleStyles.card}>
                 <h2>{title}</h2>
 
-                <p>{`${body.substr(0, 90).trim()}...`}</p>
+                <p>{excerpt.substr(0, 92).trim()}...</p>
               </article>
             </a>
           </Link>
@@ -35,10 +38,10 @@ export default function Home({ articles }) {
   );
 }
 
+// fetching data from nextjs api
+
 export const getStaticProps = async () => {
-  const result = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_limit=10`
-  );
+  const result = await fetch(`${server}/api/articles`);
   const articles = await result.json();
 
   return {
@@ -47,3 +50,18 @@ export const getStaticProps = async () => {
     },
   };
 };
+
+// fetching data from jsonplacholder.typicode.com
+
+// export const getStaticProps = async () => {
+//   const result = await fetch(
+//     `https://jsonplaceholder.typicode.com/posts?_limit=10`
+//   );
+//   const articles = await result.json();
+
+//   return {
+//     props: {
+//       articles,
+//     },
+//   };
+// };
