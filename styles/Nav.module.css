@@ -1,0 +1,30 @@
+.nav {
+  background: #222;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 50px;
+  padding: 10px;
+}
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+  width: 16rem;
+  /* outline: 1px solid yellow; */
+}
+
+/* .nav ul li {
+  padding: 0;
+  outline: 1px solid palevioletred;
+  margin: 0;
+} */
+
+.nav ul li a {
+  font-weight: 600;
+  text-decoration: none;
+}
